@@ -17,7 +17,8 @@
 // let coPilotName = null;
 // let fuelLevel = null;
 // let cargoMass = null;
-let formState = true;
+let nameState = true;
+let numberState = true;
 
 // Number in string checker
 
@@ -35,7 +36,6 @@ function jsonFetcher () {
 
          let planetNames = [];
          let randomNum = Math.floor(Math.random()*json.length);
-         window.alert (randomNum)
 
          for (let planet of json) {
 
@@ -108,8 +108,14 @@ function formChecker () {
          }
 
          window.alert (stringAlert);
-         formState = false;
+         nameState = false;
          event.preventDefault();
+
+      }
+
+      else {
+
+         nameState = true;
 
       }
 
@@ -136,12 +142,18 @@ function formChecker () {
          }
 
          window.alert (stringAlert);
-         formState = false;
+         numberState = false;
          event.preventDefault();
 
       }
 
-      if(formState) {
+      else {
+
+         numberState = true;
+
+      }
+
+      if(nameState && numberState) {
 
          let pilotStatus = document.getElementById("pilotStatus");
          let copilotStatus = document.getElementById("copilotStatus");
@@ -193,10 +205,10 @@ function formChecker () {
 
             fuelStatus.innerHTML = 'Fuel level high enough for launch.'
             cargoStatus.innerHTML = 'Cargo mass low enough for launch.'
+            jsonFetcher();
 
          }
-
-         jsonFetcher();
+                
          event.preventDefault();
 
       }
@@ -212,7 +224,6 @@ window.addEventListener ("load", function() {
    form.addEventListener("submit", function() {
 
       formChecker();
-      jsonFetcher();
       
    });
 
